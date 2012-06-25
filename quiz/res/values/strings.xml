@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello quiz!</string>
+    <string name="app_name">quiz</string>
+    <string name="login_textview_nome_text">Nome:</string>
+    <string name="login_edittext_nome_hint">Informe seu nome.</string>
+    <string name="login_textview_email_text">E-mail:</string>
+    <string name="login_edittext_email_hint">Informe um e-mail.</string>
+    <string name="login_button_entrar_text">Entrar</string>
+    <string name="ranking_button_jogar_text">Jogar</string>
+	<string name="categoria_button_jogar_text">Jogar</string>
+	<string name="generic_message_title">Mensagem</string>
+	<string name="generic_positive_button">OK</string>
+	<string name="conexao_servico_falhou">Não foi possível contactar nossos servidores.</string>
+	
+    
+</resources>

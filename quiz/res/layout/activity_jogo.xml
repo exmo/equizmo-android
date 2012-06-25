@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/jogo_textview_pergunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pergunta?" />
+
+    <ListView
+        android:id="@+id/jogo_listview_proposicoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>
