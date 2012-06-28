@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.Usuario;
+import br.gov.serpro.quiz.view.util.FontUtil;
 
 import com.alienlabz.util.Beans;
 
@@ -40,17 +41,24 @@ public class RankingAdapter extends BaseAdapter {
 
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		View result = convertView;
+		final Context context = Beans.getBean(Context.class);
 
 		if (result == null) {
-			result = LayoutInflater.from(Beans.getBean(Context.class)).inflate(R.layout.listview_item_ranking, null);
+			result = LayoutInflater.from(context).inflate(R.layout.listview_item_ranking, null);
 		}
 
 		final TextView nome = (TextView) result.findViewById(R.id.listview_item_ranking_nome);
 		final TextView pontuacao = (TextView) result.findViewById(R.id.listview_item_ranking_pontuacao);
+		final TextView colocacao = (TextView) result.findViewById(R.id.listview_item_ranking_colocacao);
 		final Usuario usuario = (Usuario) getItem(position);
+
+		FontUtil.setFutura(nome, context.getAssets());
+		FontUtil.setFutura(pontuacao, context.getAssets());
+		FontUtil.setFutura(colocacao, context.getAssets());
 
 		nome.setText(usuario.nome);
 		pontuacao.setText(String.valueOf(usuario.pontuacao));
+		colocacao.setText(position + 1 + ".");
 
 		return result;
 	}

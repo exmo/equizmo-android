@@ -1,19 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/background" >
 
-    <TextView
-        android:id="@+id/jogo_textview_pergunta"
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dip"
+        android:src="@drawable/logo_inicial" />
+
+    <RelativeLayout
+        android:id="@+id/layout_box_pontuacao"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/box_pontuacao" >
+
+        <TextView
+            android:id="@+id/jogo_textview_label_pontuacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/ranking_pontuacao"
+            android:textColor="@color/color_textview_label_pontuacao"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/jogo_textview_pontuacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:text="0.0"
+            android:textColor="@color/color_textview_pontuacao"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_box_pontuacao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/box_ranking_geral" >
+
+        <TextView
+            android:id="@+id/jogo_textview_pergunta"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dip"
+            android:gravity="center_horizontal"
+            android:textColor="#FF9900"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/jogo_listview_proposicoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jogo_textview_pergunta"
+            android:layout_marginTop="20dip"
+            android:divider="@null" >
+        </ListView>
+    </RelativeLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pergunta?" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/imagem_face_lateral_esquerda" />
 
-    <ListView
-        android:id="@+id/jogo_listview_proposicoes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-</LinearLayout>
+</RelativeLayout>

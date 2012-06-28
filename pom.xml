@@ -16,7 +16,7 @@
 
 	<properties>
 		<platform.version>4.0.1.2</platform.version>
-		<android.sdk.path>/home/79325645572/Marlon/Desenvolvimento/Android/android-sdk</android.sdk.path>
+		<android.sdk.path>/Users/marloncarvalho/Desenvolvimento/Android/android-sdk-macosx</android.sdk.path>
 	</properties>
 
 	<dependencyManagement>

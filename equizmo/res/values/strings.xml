@@ -13,6 +13,8 @@
 	<string name="generic_message_title">Mensagem</string>
 	<string name="generic_positive_button">OK</string>
 	<string name="conexao_servico_falhou">Não foi possível contactar nossos servidores.</string>
+	<string name="ranking_pontuacao">Pontuação:</string>
+	<string name="ranking_atualizado">Ranking Atualizado</string>
 	
     
 </resources>

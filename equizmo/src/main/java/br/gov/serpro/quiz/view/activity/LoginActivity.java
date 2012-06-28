@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.exception.ProblemaConexaoServicoException;
 import br.gov.serpro.quiz.model.Usuario;
@@ -27,7 +27,7 @@ public class LoginActivity extends RoboActivity {
 	private static String TAG = "quiz";
 
 	@InjectView(R.id.login_button_entrar)
-	private Button buttonEntrar;
+	private ImageButton buttonEntrar;
 
 	@InjectView(R.id.login_edittext_nome)
 	private EditText editTextNome;

@@ -17,6 +17,7 @@ public class Jogo extends Model {
 	private Categoria categoria;
 	private List<Questao> questoes = new ArrayList<Questao>();
 	private int indiceQuestaoAtual = 0;
+	private double valorRespostaCerta = 120.0;
 
 	public Jogo(final Categoria categoria) {
 		Questao questao = new Questao();
@@ -27,16 +28,16 @@ public class Jogo extends Model {
 		questao.indiceProposicaoCerta = 2;
 		questao.proposicoes.add(new Proposicao("Marlon Fofão"));
 		questao.proposicoes.add(new Proposicao("Marlon Lindão"));
-		questao.proposicoes.add(new Proposicao("Marlon Taradão"));
+		questao.proposicoes.add(new Proposicao("Marlon Taradão (Certa)"));
 		questoes.add(questao);
 
 		questao = new Questao();
 		questao.pergunta = "Quem é o mais taradão do mundo?";
 		questao.indiceProposicaoCerta = 1;
 		questao.proposicoes.add(new Proposicao("Marlon 1"));
-		questao.proposicoes.add(new Proposicao("Marlon 2"));
+		questao.proposicoes.add(new Proposicao("Marlon 2 (Certa)"));
 		questao.proposicoes.add(new Proposicao("Marlon 3"));
-		questoes.add(questao);		
+		questoes.add(questao);
 	}
 
 	/**
@@ -49,10 +50,8 @@ public class Jogo extends Model {
 		if (isFinalizado()) {
 			throw new JogoFinalizadoException();
 		}
-
-		boolean result = getQuestao().isRespostaCerta(indiceProposicao);
+		final boolean result = getQuestao().isRespostaCerta(indiceProposicao);
 		indiceQuestaoAtual++;
-
 		return result;
 	}
 
@@ -64,11 +63,21 @@ public class Jogo extends Model {
 	public boolean isFinalizado() {
 		boolean result = false;
 
-		if (indiceQuestaoAtual > (questoes.size() - 1)) {
+		if (indiceQuestaoAtual >= questoes.size()) {
 			result = true;
 		}
 
 		return result;
+	}
+
+	public Double getPontos() {
+		short total = 0;
+		for (Questao questao : questoes) {
+			if (questao.isRespostaCerta()) {
+				total++;
+			}
+		}
+		return total * valorRespostaCerta;
 	}
 
 	/**

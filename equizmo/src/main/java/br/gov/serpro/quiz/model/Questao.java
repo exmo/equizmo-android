@@ -16,7 +16,7 @@ public class Questao extends Model {
 	public int indiceProposicaoCerta;
 	public List<Proposicao> proposicoes = new ArrayList<Proposicao>();
 	private int indiceProposicaoRespondida;
-	
+
 	public boolean isRespostaCerta(final int indiceRespostaDada) {
 		boolean result = false;
 		this.indiceProposicaoRespondida = indiceRespostaDada;
@@ -26,6 +26,10 @@ public class Questao extends Model {
 		}
 
 		return result;
+	}
+
+	public boolean isRespostaCerta() {
+		return (this.indiceProposicaoCerta == this.indiceProposicaoRespondida);
 	}
 
 }

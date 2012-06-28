@@ -44,11 +44,11 @@ public class Usuario {
 	public static List<Usuario> getRanking() {
 		final List<Usuario> usuarios = new ArrayList<Usuario>();
 
-		usuarios.add(new Usuario("Marlon", "1@1.com.br", 1000L));
-		usuarios.add(new Usuario("Marlon Tesudão", "1@1.com.br", 1000L));
-		usuarios.add(new Usuario("Marlon Lindão", "1@1.com.br", 1000L));
-		usuarios.add(new Usuario("Marlon Gatão", "1@1.com.br", 1000L));
-		usuarios.add(new Usuario("Marlon Taradão", "1@1.com.br", 1000L));
+		usuarios.add(new Usuario("Huguinho", "1@1.com.br", 1000L));
+		usuarios.add(new Usuario("Zezinho", "1@1.com.br", 1000L));
+		usuarios.add(new Usuario("Luizinho", "1@1.com.br", 1000L));
+		usuarios.add(new Usuario("Donald", "1@1.com.br", 1000L));
+		usuarios.add(new Usuario("Tio Patinhas", "1@1.com.br", 1000L));
 
 		return usuarios;
 	}

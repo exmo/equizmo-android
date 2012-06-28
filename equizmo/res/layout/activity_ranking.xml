@@ -1,18 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/background" >
 
-    <Button
-        android:id="@+id/ranking_button_jogar"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ranking_button_jogar_text" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dip"
+        android:src="@drawable/logo_inicial" />
 
-    <ListView
-        android:id="@+id/ranking_listview_desafios"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <ImageButton
+        android:id="@+id/ranking_button_jogar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_logo"
+        android:layout_marginTop="20dip"
+        android:background="@null"
+        android:src="@drawable/botao_jogar" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/layout_box_pontuacao"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ranking_button_jogar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/box_pontuacao" >
+
+        <TextView
+            android:id="@+id/ranking_textview_label_pontuacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/ranking_pontuacao"
+            android:textColor="@color/color_textview_label_pontuacao"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/ranking_textview_pontuacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:text="0"
+            android:textColor="@color/color_textview_pontuacao"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_box_titulo_ranking"
+        android:layout_marginTop="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_box_pontuacao"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:src="@drawable/ic_ranking" />
+
+        <TextView
+            android:id="@+id/ranking_textview_ranking_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="5dip"
+            android:text="@string/ranking_atualizado"
+            android:textSize="20sp"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_box_titulo_ranking"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/box_ranking_geral" >
+
+        <ListView
+            android:id="@+id/ranking_listview_jogos"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:dividerHeight="0dip" >
+        </ListView>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/imagem_face_lateral_esquerda" />
+
+</RelativeLayout>

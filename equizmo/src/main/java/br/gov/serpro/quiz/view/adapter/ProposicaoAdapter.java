@@ -3,6 +3,7 @@ package br.gov.serpro.quiz.view.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.Proposicao;
+import br.gov.serpro.quiz.view.util.FontUtil;
 
 import com.alienlabz.util.Beans;
 
@@ -21,6 +23,8 @@ import com.alienlabz.util.Beans;
  */
 public class ProposicaoAdapter extends BaseAdapter {
 	private List<Proposicao> proposicoes;
+	private int posicaoCerta = -1;
+	private int posicaoErrada = -1;
 
 	public ProposicaoAdapter(final List<Proposicao> proposicoes) {
 		this.proposicoes = proposicoes;
@@ -41,16 +45,36 @@ public class ProposicaoAdapter extends BaseAdapter {
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		View result = convertView;
 
+		final Context context = Beans.getBean(Context.class);
+
 		if (result == null) {
-			result = LayoutInflater.from(Beans.getBean(Context.class)).inflate(R.layout.listview_item_proposicao, null);
+			result = LayoutInflater.from(context).inflate(R.layout.listview_item_proposicao, null);
 		}
 
-		final TextView nome = (TextView) result.findViewById(R.id.listview_item_proposicao_nome);
+		final TextView descricao = (TextView) result.findViewById(R.id.listview_item_proposicao_nome);
+		final TextView ordem = (TextView) result.findViewById(R.id.listview_item_proposicao_ordem);
 		final Proposicao proposicao = (Proposicao) getItem(position);
 
-		nome.setText(proposicao.descricao);
+		FontUtil.setFutura(descricao, context.getAssets());
+		FontUtil.setFutura(ordem, context.getAssets());
+
+		ordem.setText(position + 1 + ".");
+
+		descricao.setText(proposicao.descricao);
+
+		if (position == posicaoCerta) {
+			descricao.setTextColor(Color.GREEN);
+		} else if (position == posicaoErrada) {
+			descricao.setTextColor(Color.RED);
+		}
 
 		return result;
+	}
+
+	public void atualizarProposicaoCertaErrada(final int posicaoCerta, final int posicaoErrada) {
+		this.posicaoCerta = posicaoCerta;
+		this.posicaoErrada = posicaoErrada;
+		notifyDataSetChanged();
 	}
 
 }

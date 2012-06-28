@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.Categoria;
+import br.gov.serpro.quiz.view.util.FontUtil;
 
 import com.alienlabz.util.Beans;
 
@@ -40,13 +41,16 @@ public class CategoriaAdapter extends BaseAdapter {
 
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		View result = convertView;
+		final Context context = Beans.getBean(Context.class);
 
 		if (result == null) {
-			result = LayoutInflater.from(Beans.getBean(Context.class)).inflate(R.layout.listview_item_categoria, null);
+			result = LayoutInflater.from(context).inflate(R.layout.listview_item_categoria, null);
 		}
 
 		final TextView nome = (TextView) result.findViewById(R.id.listview_item_categoria_nome);
 		final Categoria categoria = (Categoria) getItem(position);
+
+		FontUtil.setFutura(nome, context.getAssets());
 
 		nome.setText(categoria.nome);
 
