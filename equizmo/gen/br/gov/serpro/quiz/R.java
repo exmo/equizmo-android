@@ -33,28 +33,30 @@ public final class R {
         public static final int logo_inicial=0x7f02000c;
     }
     public static final class id {
-        public static final int categorias_listview=0x7f060006;
-        public static final int jogo_listview_proposicoes=0x7f060005;
+        public static final int categorias_listview=0x7f060008;
+        public static final int categorias_textview_categoria=0x7f060007;
+        public static final int jogo_listview_proposicoes=0x7f060006;
+        public static final int jogo_textview_categoria=0x7f060004;
         public static final int jogo_textview_label_pontuacao=0x7f060002;
-        public static final int jogo_textview_pergunta=0x7f060004;
+        public static final int jogo_textview_pergunta=0x7f060005;
         public static final int jogo_textview_pontuacao=0x7f060003;
         public static final int layout_box_pontuacao=0x7f060001;
-        public static final int layout_box_titulo_ranking=0x7f06000d;
-        public static final int listview_item_categoria_nome=0x7f060010;
-        public static final int listview_item_proposicao_nome=0x7f060012;
-        public static final int listview_item_proposicao_ordem=0x7f060011;
-        public static final int listview_item_ranking_colocacao=0x7f060013;
-        public static final int listview_item_ranking_nome=0x7f060014;
-        public static final int listview_item_ranking_pontuacao=0x7f060015;
-        public static final int login_button_entrar=0x7f060009;
-        public static final int login_edittext_email=0x7f060008;
-        public static final int login_edittext_nome=0x7f060007;
+        public static final int layout_box_titulo_ranking=0x7f06000f;
+        public static final int listview_item_categoria_nome=0x7f060012;
+        public static final int listview_item_proposicao_nome=0x7f060014;
+        public static final int listview_item_proposicao_ordem=0x7f060013;
+        public static final int listview_item_ranking_colocacao=0x7f060015;
+        public static final int listview_item_ranking_nome=0x7f060016;
+        public static final int listview_item_ranking_pontuacao=0x7f060017;
+        public static final int login_button_entrar=0x7f06000b;
+        public static final int login_edittext_email=0x7f06000a;
+        public static final int login_edittext_nome=0x7f060009;
         public static final int login_logo=0x7f060000;
-        public static final int ranking_button_jogar=0x7f06000a;
-        public static final int ranking_listview_jogos=0x7f06000f;
-        public static final int ranking_textview_label_pontuacao=0x7f06000b;
-        public static final int ranking_textview_pontuacao=0x7f06000c;
-        public static final int ranking_textview_ranking_label=0x7f06000e;
+        public static final int ranking_button_jogar=0x7f06000c;
+        public static final int ranking_listview_jogos=0x7f060011;
+        public static final int ranking_textview_label_pontuacao=0x7f06000d;
+        public static final int ranking_textview_pontuacao=0x7f06000e;
+        public static final int ranking_textview_ranking_label=0x7f060010;
     }
     public static final class layout {
         public static final int activity_jogo=0x7f030000;
@@ -68,6 +70,7 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f050001;
         public static final int categoria_button_jogar_text=0x7f050008;
+        public static final int categorias_selecione_categoria=0x7f05000e;
         public static final int conexao_servico_falhou=0x7f05000b;
         public static final int generic_message_title=0x7f050009;
         public static final int generic_positive_button=0x7f05000a;

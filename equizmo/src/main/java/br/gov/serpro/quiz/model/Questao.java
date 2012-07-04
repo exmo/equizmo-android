@@ -13,9 +13,9 @@ import com.alienlabz.activerecord.Model;
  */
 public class Questao extends Model {
 	public String pergunta;
-	public int indiceProposicaoCerta;
+	public int indiceProposicaoCerta = -2;
 	public List<Proposicao> proposicoes = new ArrayList<Proposicao>();
-	private int indiceProposicaoRespondida;
+	private int indiceProposicaoRespondida = -1;
 
 	public boolean isRespostaCerta(final int indiceRespostaDada) {
 		boolean result = false;

@@ -1,7 +1,9 @@
 package br.gov.serpro.quiz.model;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import br.gov.serpro.quiz.service.CategoriaService;
+import br.gov.serpro.quiz.service.soap.CategoriaServiceImpl;
 
 import com.alienlabz.activerecord.Model;
 
@@ -22,13 +24,8 @@ public class Categoria extends Model {
 	}
 
 	public static List<Categoria> getCategoriasDisponiveis() {
-		final List<Categoria> categorias = new ArrayList<Categoria>();
-
-		categorias.add(new Categoria("Categoria 1"));
-		categorias.add(new Categoria("Categoria 2"));
-		categorias.add(new Categoria("Categoria 3"));
-
-		return categorias;
+		final CategoriaService service = new CategoriaServiceImpl();
+		return service.obterCategorias();
 	}
 
 }

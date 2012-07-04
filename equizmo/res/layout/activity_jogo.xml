@@ -44,10 +44,26 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/jogo_textview_categoria"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_box_pontuacao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dip"
+        android:gravity="center_horizontal"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:text="Categoria"
+        android:textColor="#FF9900"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jogo_textview_categoria"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"

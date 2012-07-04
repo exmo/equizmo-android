@@ -21,7 +21,6 @@ final public class Sound {
 
 	public static void play(final String file) {
 		final Context context = Beans.getBean(Context.class);
-
 		try {
 			AssetFileDescriptor afd = context.getAssets().openFd("mp3/" + file);
 			MediaPlayer mediaPlayer = new MediaPlayer();

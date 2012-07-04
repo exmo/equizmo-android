@@ -22,10 +22,22 @@
         android:layout_marginTop="10dip"
         android:background="@drawable/box_ranking_geral" >
 
+        <TextView
+            android:id="@+id/categorias_textview_categoria"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dip"
+            android:gravity="center_horizontal"
+            android:text="@string/categorias_selecione_categoria"
+            android:textColor="#FF9900"
+            android:textSize="20sp" />
+
         <ListView
             android:id="@+id/categorias_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/categorias_textview_categoria"
             android:divider="@null" />
     </RelativeLayout>
 

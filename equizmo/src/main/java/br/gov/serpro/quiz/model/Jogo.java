@@ -3,7 +3,8 @@ package br.gov.serpro.quiz.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.gov.serpro.quiz.exception.JogoFinalizadoException;
+import br.gov.serpro.quiz.service.JogoService;
+import br.gov.serpro.quiz.service.soap.JogoServiceImpl;
 
 import com.alienlabz.activerecord.Model;
 
@@ -18,26 +19,16 @@ public class Jogo extends Model {
 	private List<Questao> questoes = new ArrayList<Questao>();
 	private int indiceQuestaoAtual = 0;
 	private double valorRespostaCerta = 120.0;
+	private Usuario usuario;
+	private final JogoService jogoService = new JogoServiceImpl();
 
-	public Jogo(final Categoria categoria) {
-		Questao questao = new Questao();
-
+	public Jogo(final Categoria categoria, final Usuario usuario) {
 		this.categoria = categoria;
+		this.usuario = usuario;
+	}
 
-		questao.pergunta = "Quem é o mais lindo do mundo?";
-		questao.indiceProposicaoCerta = 2;
-		questao.proposicoes.add(new Proposicao("Marlon Fofão"));
-		questao.proposicoes.add(new Proposicao("Marlon Lindão"));
-		questao.proposicoes.add(new Proposicao("Marlon Taradão (Certa)"));
-		questoes.add(questao);
-
-		questao = new Questao();
-		questao.pergunta = "Quem é o mais taradão do mundo?";
-		questao.indiceProposicaoCerta = 1;
-		questao.proposicoes.add(new Proposicao("Marlon 1"));
-		questao.proposicoes.add(new Proposicao("Marlon 2 (Certa)"));
-		questao.proposicoes.add(new Proposicao("Marlon 3"));
-		questoes.add(questao);
+	public void iniciar() {
+		this.questoes = jogoService.obterQuestoes(categoria);
 	}
 
 	/**
@@ -47,11 +38,13 @@ public class Jogo extends Model {
 	 * @return Verdadeiro caso tenha acertado, falso caso contrário.
 	 */
 	public boolean responder(final int indiceProposicao) {
-		if (isFinalizado()) {
-			throw new JogoFinalizadoException();
-		}
-		final boolean result = getQuestao().isRespostaCerta(indiceProposicao);
+		boolean result = getQuestao().isRespostaCerta(indiceProposicao);
 		indiceQuestaoAtual++;
+
+		if (isFinalizado()) {
+			usuario.somarPontos(getPontos());
+		}
+
 		return result;
 	}
 

@@ -4,6 +4,7 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,14 +54,32 @@ public class LoginActivity extends RoboActivity {
 				usuario.nome = editTextNome.getText().toString();
 				usuario.email = editTextEmail.getText().toString();
 
-				try {
-					usuario.registrar();
-					final Intent intent = new Intent(LoginActivity.this, RankingActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-				} catch (final ProblemaConexaoServicoException e) {
-					Message.error(R.string.conexao_servico_falhou);
-				}
+				new AsyncTask<Void, Void, Boolean>() {
+
+					@Override
+					protected Boolean doInBackground(Void... params) {
+						boolean result = true;
+						try {
+							usuario.registrar();
+						} catch (final ProblemaConexaoServicoException e) {
+							result = false;
+						} catch (final RuntimeException e) {
+							result = false;
+						}
+						return result;
+					}
+
+					protected void onPostExecute(Boolean result) {
+						if (!result) {
+							Message.error(R.string.conexao_servico_falhou);
+						} else {
+							final Intent intent = new Intent(LoginActivity.this, RankingActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+						}
+					}
+
+				}.execute();
 
 			}
 

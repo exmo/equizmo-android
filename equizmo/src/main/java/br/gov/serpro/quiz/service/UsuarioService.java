@@ -1,6 +1,5 @@
 package br.gov.serpro.quiz.service;
 
-import br.gov.serpro.quiz.model.Usuario;
 
 /**
  * 
@@ -9,6 +8,7 @@ import br.gov.serpro.quiz.model.Usuario;
  */
 public interface UsuarioService {
 
-	Usuario registrarUsuario(String email, String nome);
+	Integer registrar(String nome, String email);
 
+	Integer enviarPontos(String email, Integer pontos);
 }

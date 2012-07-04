@@ -4,6 +4,7 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,6 +17,7 @@ import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.Categoria;
 import br.gov.serpro.quiz.model.Jogo;
 import br.gov.serpro.quiz.model.Questao;
+import br.gov.serpro.quiz.model.Usuario;
 import br.gov.serpro.quiz.view.adapter.ProposicaoAdapter;
 import br.gov.serpro.quiz.view.util.FontUtil;
 import br.gov.serpro.quiz.view.util.Sound;
@@ -37,6 +39,9 @@ public class JogoActivity extends RoboActivity {
 	@InjectView(R.id.jogo_textview_pergunta)
 	private TextView textViewPergunta;
 
+	@InjectView(R.id.jogo_textview_categoria)
+	private TextView textViewCategoria;
+
 	@InjectView(R.id.jogo_textview_pontuacao)
 	private TextView textViewPontuacao;
 
@@ -52,11 +57,28 @@ public class JogoActivity extends RoboActivity {
 
 		if (getIntent().getExtras() != null) {
 			final String categoria = getIntent().getExtras().getString("categoria");
-			jogo = new Jogo(new Categoria(categoria));
-			listViewProposicao.setAdapter(new ProposicaoAdapter(jogo.getQuestao().proposicoes));
-			textViewPergunta.setText(jogo.getQuestao().pergunta);
+			jogo = new Jogo(new Categoria(categoria), Usuario.getUsuarioLogado());
+
+			new AsyncTask<Void, Void, Void>() {
+
+				@Override
+				protected Void doInBackground(Void... params) {
+					jogo.iniciar();
+					return null;
+				}
+
+				@Override
+				protected void onPostExecute(Void result) {
+					listViewProposicao.setAdapter(new ProposicaoAdapter(jogo.getQuestao().proposicoes));
+					textViewPergunta.setText(jogo.getQuestao().pergunta);
+					textViewCategoria.setText(categoria);
+				}
+
+			}.execute();
+
 		}
 
+		FontUtil.setFutura(textViewCategoria, getAssets());
 		FontUtil.setBauhaus(textViewLabelPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewPergunta, getAssets());
@@ -68,36 +90,50 @@ public class JogoActivity extends RoboActivity {
 		listViewProposicao.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(final AdapterView<?> adapterView, final View view, final int position, final long id) {
-				final ProposicaoAdapter adapter = (ProposicaoAdapter) listViewProposicao.getAdapter();
+
+				// Obter aqui a questão que está sendo respondida.
 				final Questao questao = jogo.getQuestao();
 
-				if (jogo.responder(position)) {
-					Sound.success();
-					adapter.atualizarProposicaoCertaErrada(questao.indiceProposicaoCerta, -1);
-				} else {
-					Sound.fail();
-					adapter.atualizarProposicaoCertaErrada(questao.indiceProposicaoCerta, position);
-				}
-
-				listViewProposicao.setClickable(false);
-				atualizarDados();
-
-				final Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
+				new AsyncTask<Void, Void, Boolean>() {
 
 					@Override
-					public void run() {
-						if (jogo.isFinalizado()) {
-							final Intent intent = new Intent(JogoActivity.this, RankingActivity.class);
-							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(intent);
-						} else {
-							listViewProposicao.setClickable(true);
-							irProximaQuestao();
-						}
-					}
-				}, 2500);
+					protected Boolean doInBackground(Void... params) {
 
+						// Responde a pergunta e já passa para a próxima.
+						return jogo.responder(position);
+					}
+
+					protected void onPostExecute(Boolean result) {
+						final ProposicaoAdapter adapter = (ProposicaoAdapter) listViewProposicao.getAdapter();
+
+						if (result) {
+							Sound.success();
+							adapter.atualizarProposicaoCertaErrada(questao.indiceProposicaoCerta, -1);
+						} else {
+							Sound.fail();
+							adapter.atualizarProposicaoCertaErrada(questao.indiceProposicaoCerta, position);
+						}
+
+						listViewProposicao.setClickable(false);
+						atualizarDados();
+
+						final Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+
+							@Override
+							public void run() {
+								if (jogo.isFinalizado()) {
+									final Intent intent = new Intent(JogoActivity.this, RankingActivity.class);
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+									startActivity(intent);
+								} else {
+									listViewProposicao.setClickable(true);
+									irProximaQuestao();
+								}
+							}
+						}, 2500);
+					}
+				}.execute();
 			}
 
 		});

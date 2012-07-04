@@ -47,7 +47,7 @@ public class RankingActivity extends RoboActivity {
 		super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
 		setListeners();
-		textViewPontuacao.setText("20.000");
+		textViewPontuacao.setText(String.valueOf(Usuario.getUsuarioLogado().pontuacao));
 		FontUtil.setBauhaus(textViewLabelPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewLabelRanking, getAssets());
