@@ -12,6 +12,8 @@
         android:layout_marginTop="30dip"
         android:src="@drawable/logo_inicial" />
 
+    <include layout="@layout/include_alerta" />
+
     <RelativeLayout
         android:id="@+id/layout_box_pontuacao"
         android:layout_width="fill_parent"

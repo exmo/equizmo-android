@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.Categoria;
@@ -48,6 +49,9 @@ public class JogoActivity extends RoboActivity {
 	@InjectView(R.id.jogo_textview_label_pontuacao)
 	private TextView textViewLabelPontuacao;
 
+	@InjectView(R.id.box_alerta)
+	private RelativeLayout boxAlerta;
+
 	private Jogo jogo = null;
 
 	@Override
@@ -61,6 +65,10 @@ public class JogoActivity extends RoboActivity {
 
 			new AsyncTask<Void, Void, Void>() {
 
+				protected void onPreExecute() {
+					boxAlerta.setVisibility(View.VISIBLE);
+				}
+
 				@Override
 				protected Void doInBackground(Void... params) {
 					jogo.iniciar();
@@ -72,6 +80,7 @@ public class JogoActivity extends RoboActivity {
 					listViewProposicao.setAdapter(new ProposicaoAdapter(jogo.getQuestao().proposicoes));
 					textViewPergunta.setText(jogo.getQuestao().pergunta);
 					textViewCategoria.setText(categoria);
+					boxAlerta.setVisibility(View.GONE);
 				}
 
 			}.execute();

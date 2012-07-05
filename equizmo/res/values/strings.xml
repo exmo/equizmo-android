@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello quiz!</string>
-    <string name="app_name">quiz</string>
+    <string name="app_name">eQUIZmó</string>
     <string name="login_textview_nome_text">Nome:</string>
     <string name="login_edittext_nome_hint">Informe seu nome.</string>
     <string name="login_textview_email_text">E-mail:</string>

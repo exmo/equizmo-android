@@ -8,11 +8,11 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.exception.ProblemaConexaoServicoException;
 import br.gov.serpro.quiz.model.Usuario;
@@ -29,8 +29,6 @@ import com.google.inject.Inject;
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends RoboActivity {
 
-	private static String TAG = "quiz";
-
 	@InjectView(R.id.login_button_entrar)
 	private ImageButton buttonEntrar;
 
@@ -40,13 +38,15 @@ public class LoginActivity extends RoboActivity {
 	@InjectView(R.id.login_edittext_email)
 	private EditText editTextEmail;
 
+	@InjectView(R.id.box_alerta)
+	private RelativeLayout boxAlerta;
+
 	@Inject
 	private LocationManager locationManager;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i(TAG, "onCreate");
 		setListeners();
 	}
 
@@ -57,6 +57,10 @@ public class LoginActivity extends RoboActivity {
 		buttonEntrar.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
+				boxAlerta.setVisibility(View.VISIBLE);
+				buttonEntrar.setClickable(false);
+				buttonEntrar.setEnabled(false);
+
 				Location localizacao = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
 				final Usuario usuario = new Usuario();
@@ -85,6 +89,11 @@ public class LoginActivity extends RoboActivity {
 					}
 
 					protected void onPostExecute(Boolean result) {
+
+						buttonEntrar.setClickable(true);
+						buttonEntrar.setEnabled(true);
+						boxAlerta.setVisibility(View.GONE);
+
 						if (!result) {
 							Message.error(R.string.conexao_servico_falhou, LoginActivity.this);
 						} else {

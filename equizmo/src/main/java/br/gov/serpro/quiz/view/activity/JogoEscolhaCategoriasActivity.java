@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.Categoria;
@@ -36,6 +37,9 @@ public class JogoEscolhaCategoriasActivity extends RoboActivity {
 	@InjectView(R.id.categorias_listview)
 	private ListView listViewCategorias;
 
+	@InjectView(R.id.box_alerta)
+	private RelativeLayout boxAlerta;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +49,10 @@ public class JogoEscolhaCategoriasActivity extends RoboActivity {
 
 		new AsyncTask<Void, Void, List<Categoria>>() {
 
+			protected void onPreExecute() {
+				boxAlerta.setVisibility(View.VISIBLE);
+			}
+
 			@Override
 			protected List<Categoria> doInBackground(Void... params) {
 				return Categoria.getCategoriasDisponiveis();
@@ -53,6 +61,7 @@ public class JogoEscolhaCategoriasActivity extends RoboActivity {
 			@Override
 			protected void onPostExecute(List<Categoria> result) {
 				listViewCategorias.setAdapter(new CategoriaAdapter(result));
+				boxAlerta.setVisibility(View.GONE);
 			}
 
 		}.execute();
