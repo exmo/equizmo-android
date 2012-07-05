@@ -16,6 +16,8 @@
 	<string name="ranking_pontuacao">Pontuação:</string>
 	<string name="ranking_atualizado">Ranking Atualizado</string>
 	<string name="categorias_selecione_categoria">Selecione uma Categoria</string>
+	<string name="login_nome_hint">Informe seu nome</string>
+	<string name="login_email_hint">Informe seu e-mail</string>
 	
     
 </resources>

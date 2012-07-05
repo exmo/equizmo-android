@@ -1,6 +1,5 @@
 package br.gov.serpro.quiz.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.gov.serpro.quiz.service.UsuarioService;
@@ -16,20 +15,25 @@ public class Usuario {
 	private static Usuario usuarioLogado = null;
 	public String nome;
 	public String email;
+	public double latitude;
+	public double longitude;
 	public Integer pontuacao;
-	private final UsuarioService service = new UsuarioServiceImpl();;
+	private static final UsuarioService service = new UsuarioServiceImpl();
 
 	public Usuario() {
 	}
 
-	public Usuario(final String nome, final String email, final Integer pontuacao) {
+	public Usuario(final String nome, final String email, final Integer pontuacao, final Double latitude,
+			final Double longitude) {
 		this.nome = nome;
 		this.email = email;
 		this.pontuacao = pontuacao;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public Usuario(final String nome, final String email) {
-		this(nome, email, 0);
+		this(nome, email, 0, 0D, 0D);
 	}
 
 	public void somarPontos(final Double value) {
@@ -37,7 +41,7 @@ public class Usuario {
 	}
 
 	public void registrar() {
-		this.pontuacao = service.registrar(nome, email);
+		this.pontuacao = service.registrar(nome, email, latitude, longitude);
 		Usuario.usuarioLogado = this;
 	}
 
@@ -50,15 +54,7 @@ public class Usuario {
 	}
 
 	public static List<Usuario> getRanking() {
-		final List<Usuario> usuarios = new ArrayList<Usuario>();
-
-		usuarios.add(new Usuario("Huguinho", "1@1.com.br", 1000));
-		usuarios.add(new Usuario("Zezinho", "1@1.com.br", 1000));
-		usuarios.add(new Usuario("Luizinho", "1@1.com.br", 1000));
-		usuarios.add(new Usuario("Donald", "1@1.com.br", 1000));
-		usuarios.add(new Usuario("Tio Patinhas", "1@1.com.br", 1000));
-
-		return usuarios;
+		return service.obterRanking();
 	}
 
 }

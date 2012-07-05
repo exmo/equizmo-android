@@ -1,9 +1,12 @@
 package br.gov.serpro.quiz.view.activity;
 
+import java.util.List;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,7 +54,21 @@ public class RankingActivity extends RoboActivity {
 		FontUtil.setBauhaus(textViewLabelPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewLabelRanking, getAssets());
-		listView.setAdapter(new RankingAdapter(Usuario.getRanking()));
+
+		new AsyncTask<Void, Void, List<Usuario>>() {
+
+			@Override
+			protected List<Usuario> doInBackground(Void... params) {
+				return Usuario.getRanking();
+			}
+
+			@Override
+			protected void onPostExecute(List<Usuario> result) {
+				listView.setAdapter(new RankingAdapter(result));
+			}
+
+		}.execute();
+
 	}
 
 	private void setListeners() {

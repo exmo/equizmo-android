@@ -4,6 +4,8 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,8 @@ import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.exception.ProblemaConexaoServicoException;
 import br.gov.serpro.quiz.model.Usuario;
 import br.gov.serpro.quiz.view.util.Message;
+
+import com.google.inject.Inject;
 
 /**
  * Activity para a tela de login.
@@ -36,6 +40,9 @@ public class LoginActivity extends RoboActivity {
 	@InjectView(R.id.login_edittext_email)
 	private EditText editTextEmail;
 
+	@Inject
+	private LocationManager locationManager;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,9 +57,17 @@ public class LoginActivity extends RoboActivity {
 		buttonEntrar.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
+				Location localizacao = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
 				final Usuario usuario = new Usuario();
+
 				usuario.nome = editTextNome.getText().toString();
 				usuario.email = editTextEmail.getText().toString();
+
+				if (localizacao != null) {
+					usuario.longitude = localizacao.getLongitude();
+					usuario.latitude = localizacao.getLatitude();
+				}
 
 				new AsyncTask<Void, Void, Boolean>() {
 
@@ -71,7 +86,7 @@ public class LoginActivity extends RoboActivity {
 
 					protected void onPostExecute(Boolean result) {
 						if (!result) {
-							Message.error(R.string.conexao_servico_falhou);
+							Message.error(R.string.conexao_servico_falhou, LoginActivity.this);
 						} else {
 							final Intent intent = new Intent(LoginActivity.this, RankingActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
