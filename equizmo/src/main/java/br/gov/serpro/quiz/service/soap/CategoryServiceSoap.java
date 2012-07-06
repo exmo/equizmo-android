@@ -10,18 +10,18 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import br.gov.serpro.quiz.model.Categoria;
-import br.gov.serpro.quiz.service.CategoriaService;
+import br.gov.serpro.quiz.model.Category;
+import br.gov.serpro.quiz.service.CategoryService;
 
-public class CategoriaServiceImpl implements CategoriaService {
+public class CategoryServiceSoap implements CategoryService {
 
 	private static final String NAMESPACE = "http://webservice/";
 	private static final String METHOD_NAME = "listCategories";
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Categoria> obterCategorias() {
-		final List<Categoria> result = new ArrayList<Categoria>();
+	public List<Category> getCategories() {
+		final List<Category> result = new ArrayList<Category>();
 		final SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 		final SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(request);
@@ -31,7 +31,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 			androidHttpTransport.call("", envelope);
 			final Vector<SoapPrimitive> vector = (Vector<SoapPrimitive>) envelope.getResponse();
 			for (SoapPrimitive nome : vector) {
-				result.add(new Categoria(nome.toString()));
+				result.add(new Category(nome.toString()));
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);

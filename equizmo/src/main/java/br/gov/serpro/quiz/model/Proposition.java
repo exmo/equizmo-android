@@ -8,14 +8,14 @@ import com.alienlabz.activerecord.Model;
  * @author Marlon Silva Carvalho
  * @since 1.0.0
  */
-public class Proposicao extends Model {
-	public String descricao;
+public class Proposition extends Model {
+	public String description;
 
-	public Proposicao() {
+	public Proposition() {
 	}
 
-	public Proposicao(final String descricao) {
-		this.descricao = descricao;
+	public Proposition(final String description) {
+		this.description = description;
 	}
 
 }

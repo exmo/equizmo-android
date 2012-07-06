@@ -14,6 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="25dip"
-        android:src="@drawable/ampulheta" />
+        android:src="@drawable/timer" />
 
 </RelativeLayout>

@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import br.gov.serpro.quiz.R;
-import br.gov.serpro.quiz.exception.ProblemaConexaoServicoException;
-import br.gov.serpro.quiz.model.Usuario;
+import br.gov.serpro.quiz.exception.NetworkException;
+import br.gov.serpro.quiz.model.User;
 import br.gov.serpro.quiz.view.util.Message;
 
 import com.google.inject.Inject;
@@ -30,16 +30,16 @@ import com.google.inject.Inject;
 public class LoginActivity extends RoboActivity {
 
 	@InjectView(R.id.login_button_entrar)
-	private ImageButton buttonEntrar;
+	private ImageButton buttonEnter;
 
 	@InjectView(R.id.login_edittext_nome)
-	private EditText editTextNome;
+	private EditText editTextName;
 
 	@InjectView(R.id.login_edittext_email)
 	private EditText editTextEmail;
 
 	@InjectView(R.id.box_alerta)
-	private RelativeLayout boxAlerta;
+	private RelativeLayout boxAlert;
 
 	@Inject
 	private LocationManager locationManager;
@@ -47,30 +47,36 @@ public class LoginActivity extends RoboActivity {
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setListeners();
+
+		if (User.loadLastUser()) {
+			System.out.println("MOTHER FUCKER!");
+			startRanking();
+		} else {
+			setListeners();
+		}
 	}
 
 	/**
 	 * Definir os listeners dos componentes de interface.
 	 */
 	private void setListeners() {
-		buttonEntrar.setOnClickListener(new OnClickListener() {
+		buttonEnter.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
-				boxAlerta.setVisibility(View.VISIBLE);
-				buttonEntrar.setClickable(false);
-				buttonEntrar.setEnabled(false);
+				boxAlert.setVisibility(View.VISIBLE);
+				buttonEnter.setClickable(false);
+				buttonEnter.setEnabled(false);
 
-				Location localizacao = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				final Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-				final Usuario usuario = new Usuario();
+				final User user = new User();
 
-				usuario.nome = editTextNome.getText().toString();
-				usuario.email = editTextEmail.getText().toString();
+				user.name = editTextName.getText().toString();
+				user.email = editTextEmail.getText().toString();
 
-				if (localizacao != null) {
-					usuario.longitude = localizacao.getLongitude();
-					usuario.latitude = localizacao.getLatitude();
+				if (location != null) {
+					user.longitude = location.getLongitude();
+					user.latitude = location.getLatitude();
 				}
 
 				new AsyncTask<Void, Void, Boolean>() {
@@ -79,8 +85,8 @@ public class LoginActivity extends RoboActivity {
 					protected Boolean doInBackground(Void... params) {
 						boolean result = true;
 						try {
-							usuario.registrar();
-						} catch (final ProblemaConexaoServicoException e) {
+							user.register();
+						} catch (final NetworkException e) {
 							result = false;
 						} catch (final RuntimeException e) {
 							result = false;
@@ -89,17 +95,16 @@ public class LoginActivity extends RoboActivity {
 					}
 
 					protected void onPostExecute(Boolean result) {
+						user.store();
 
-						buttonEntrar.setClickable(true);
-						buttonEntrar.setEnabled(true);
-						boxAlerta.setVisibility(View.GONE);
+						buttonEnter.setClickable(true);
+						buttonEnter.setEnabled(true);
+						boxAlert.setVisibility(View.GONE);
 
 						if (!result) {
-							Message.error(R.string.conexao_servico_falhou, LoginActivity.this);
+							Message.error(R.string.conn_servico_fail, LoginActivity.this);
 						} else {
-							final Intent intent = new Intent(LoginActivity.this, RankingActivity.class);
-							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(intent);
+							startRanking();
 						}
 					}
 
@@ -108,6 +113,12 @@ public class LoginActivity extends RoboActivity {
 			}
 
 		});
+	}
+
+	private void startRanking() {
+		final Intent intent = new Intent(LoginActivity.this, RankingActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 	}
 
 }

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
-import br.gov.serpro.quiz.model.Usuario;
+import br.gov.serpro.quiz.model.User;
 import br.gov.serpro.quiz.view.util.FontUtil;
 
 import com.alienlabz.util.Beans;
@@ -21,9 +21,9 @@ import com.alienlabz.util.Beans;
  * @since 1.0.0
  */
 public class RankingAdapter extends BaseAdapter {
-	private List<Usuario> usuarios;
+	private List<User> usuarios;
 
-	public RankingAdapter(final List<Usuario> usuarios) {
+	public RankingAdapter(final List<User> usuarios) {
 		this.usuarios = usuarios;
 	}
 
@@ -50,14 +50,14 @@ public class RankingAdapter extends BaseAdapter {
 		final TextView nome = (TextView) result.findViewById(R.id.listview_item_ranking_nome);
 		final TextView pontuacao = (TextView) result.findViewById(R.id.listview_item_ranking_pontuacao);
 		final TextView colocacao = (TextView) result.findViewById(R.id.listview_item_ranking_colocacao);
-		final Usuario usuario = (Usuario) getItem(position);
+		final User usuario = (User) getItem(position);
 
 		FontUtil.setFutura(nome, context.getAssets());
 		FontUtil.setFutura(pontuacao, context.getAssets());
 		FontUtil.setFutura(colocacao, context.getAssets());
 
-		nome.setText(usuario.nome);
-		pontuacao.setText(String.valueOf(usuario.pontuacao));
+		nome.setText(usuario.name);
+		pontuacao.setText(String.valueOf(usuario.score));
 		colocacao.setText(position + 1 + ".");
 
 		return result;

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
-import br.gov.serpro.quiz.model.Proposicao;
+import br.gov.serpro.quiz.model.Proposition;
 import br.gov.serpro.quiz.view.util.FontUtil;
 
 import com.alienlabz.util.Beans;
@@ -21,12 +21,12 @@ import com.alienlabz.util.Beans;
  * @author Marlon Silva Carvalho
  * @since 1.0.0
  */
-public class ProposicaoAdapter extends BaseAdapter {
-	private List<Proposicao> proposicoes;
+public class PropositionAdapter extends BaseAdapter {
+	private List<Proposition> proposicoes;
 	private int posicaoCerta = -1;
 	private int posicaoErrada = -1;
 
-	public ProposicaoAdapter(final List<Proposicao> proposicoes) {
+	public PropositionAdapter(final List<Proposition> proposicoes) {
 		this.proposicoes = proposicoes;
 	}
 
@@ -48,19 +48,19 @@ public class ProposicaoAdapter extends BaseAdapter {
 		final Context context = Beans.getBean(Context.class);
 
 		if (result == null) {
-			result = LayoutInflater.from(context).inflate(R.layout.listview_item_proposicao, null);
+			result = LayoutInflater.from(context).inflate(R.layout.listview_item_proposition, null);
 		}
 
 		final TextView descricao = (TextView) result.findViewById(R.id.listview_item_proposicao_nome);
 		final TextView ordem = (TextView) result.findViewById(R.id.listview_item_proposicao_ordem);
-		final Proposicao proposicao = (Proposicao) getItem(position);
+		final Proposition proposicao = (Proposition) getItem(position);
 
 		FontUtil.setFutura(descricao, context.getAssets());
 		FontUtil.setFutura(ordem, context.getAssets());
 
 		ordem.setText(position + 1 + ".");
 
-		descricao.setText(proposicao.descricao);
+		descricao.setText(proposicao.description);
 
 		if (position == posicaoCerta) {
 			descricao.setTextColor(Color.GREEN);

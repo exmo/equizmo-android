@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:textColor="@color/color_listview_item_ranking_colocacao"
+        android:textColor="@color/color_listview_item_ranking_score"
         android:textSize="20sp"
         android:textStyle="bold" />
 

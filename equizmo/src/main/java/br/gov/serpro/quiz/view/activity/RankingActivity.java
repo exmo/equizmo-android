@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
-import br.gov.serpro.quiz.model.Usuario;
+import br.gov.serpro.quiz.model.User;
 import br.gov.serpro.quiz.view.adapter.RankingAdapter;
 import br.gov.serpro.quiz.view.util.FontUtil;
 
@@ -50,20 +50,21 @@ public class RankingActivity extends RoboActivity {
 		super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
 		setListeners();
-		textViewPontuacao.setText(String.valueOf(Usuario.getUsuarioLogado().pontuacao));
+		textViewPontuacao.setText(String.valueOf(User.getLoggedUser().score));
+		
 		FontUtil.setBauhaus(textViewLabelPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewLabelRanking, getAssets());
 
-		new AsyncTask<Void, Void, List<Usuario>>() {
+		new AsyncTask<Void, Void, List<User>>() {
 
 			@Override
-			protected List<Usuario> doInBackground(Void... params) {
-				return Usuario.getRanking();
+			protected List<User> doInBackground(Void... params) {
+				return User.getRanking();
 			}
 
 			@Override
-			protected void onPostExecute(List<Usuario> result) {
+			protected void onPostExecute(List<User> result) {
 				listView.setAdapter(new RankingAdapter(result));
 			}
 
@@ -75,7 +76,7 @@ public class RankingActivity extends RoboActivity {
 		buttonJogar.setOnClickListener(new OnClickListener() {
 
 			public void onClick(final View v) {
-				final Intent intent = new Intent(RankingActivity.this, JogoEscolhaCategoriasActivity.class);
+				final Intent intent = new Intent(RankingActivity.this, GameCategoryActivity.class);
 				startActivity(intent);
 			}
 

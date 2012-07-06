@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dip"
-        android:src="@drawable/logo_inicial" />
+        android:src="@drawable/logo" />
 
-    <include layout="@layout/include_alerta" />
+    <include layout="@layout/include_alert" />
 
     <RelativeLayout
         android:id="@+id/layout_box_pontuacao"
@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/ranking_pontuacao"
-            android:textColor="@color/color_textview_label_pontuacao"
+            android:text="@string/ranking_score"
+            android:textColor="@color/color_textview_label_score"
             android:textSize="19sp" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dip"
             android:text="0.0"
-            android:textColor="@color/color_textview_pontuacao"
+            android:textColor="@color/color_textview_score"
             android:textSize="20sp" />
     </RelativeLayout>
 
@@ -70,7 +70,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="10dip"
-        android:background="@drawable/box_ranking_geral" >
+        android:background="@drawable/box_ranking" >
 
         <TextView
             android:id="@+id/jogo_textview_pergunta"
@@ -97,6 +97,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/imagem_face_lateral_esquerda" />
+        android:src="@drawable/image_face_left" />
 
 </RelativeLayout>

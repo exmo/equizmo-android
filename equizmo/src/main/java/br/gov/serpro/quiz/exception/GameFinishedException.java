@@ -6,7 +6,7 @@ package br.gov.serpro.quiz.exception;
  * @author Marlon Silva Carvalho
  * @since 1.0.
  */
-public class JogoFinalizadoException extends RuntimeException {
+public class GameFinishedException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dip"
-        android:src="@drawable/logo_inicial" />
+        android:src="@drawable/logo" />
 
-    <include layout="@layout/include_alerta" />
+    <include layout="@layout/include_alert" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -22,7 +22,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="10dip"
-        android:background="@drawable/box_ranking_geral" >
+        android:background="@drawable/box_ranking" >
 
         <TextView
             android:id="@+id/categorias_textview_categoria"
@@ -31,7 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dip"
             android:gravity="center_horizontal"
-            android:text="@string/categorias_selecione_categoria"
+            android:text="@string/select_category"
             android:textColor="#FF9900"
             android:textSize="20sp" />
 
@@ -48,6 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/imagem_face_lateral_esquerda" />
+        android:src="@drawable/image_face_left" />
 
 </RelativeLayout>

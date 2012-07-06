@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
-import br.gov.serpro.quiz.model.Categoria;
+import br.gov.serpro.quiz.model.Category;
 import br.gov.serpro.quiz.view.util.FontUtil;
 
 import com.alienlabz.util.Beans;
@@ -20,10 +20,10 @@ import com.alienlabz.util.Beans;
  * @author Marlon Silva Carvalho
  * @since 1.0.0
  */
-public class CategoriaAdapter extends BaseAdapter {
-	private List<Categoria> categorias;
+public class CategoryAdapter extends BaseAdapter {
+	private List<Category> categorias;
 
-	public CategoriaAdapter(final List<Categoria> categorias) {
+	public CategoryAdapter(final List<Category> categorias) {
 		this.categorias = categorias;
 	}
 
@@ -44,15 +44,15 @@ public class CategoriaAdapter extends BaseAdapter {
 		final Context context = Beans.getBean(Context.class);
 
 		if (result == null) {
-			result = LayoutInflater.from(context).inflate(R.layout.listview_item_categoria, null);
+			result = LayoutInflater.from(context).inflate(R.layout.listview_item_category, null);
 		}
 
 		final TextView nome = (TextView) result.findViewById(R.id.listview_item_categoria_nome);
-		final Categoria categoria = (Categoria) getItem(position);
+		final Category categoria = (Category) getItem(position);
 
 		FontUtil.setFutura(nome, context.getAssets());
 
-		nome.setText(categoria.nome);
+		nome.setText(categoria.name);
 
 		return result;
 	}

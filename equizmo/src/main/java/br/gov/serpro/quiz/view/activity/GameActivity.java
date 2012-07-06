@@ -15,11 +15,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import br.gov.serpro.quiz.R;
-import br.gov.serpro.quiz.model.Categoria;
-import br.gov.serpro.quiz.model.Jogo;
-import br.gov.serpro.quiz.model.Questao;
-import br.gov.serpro.quiz.model.Usuario;
-import br.gov.serpro.quiz.view.adapter.ProposicaoAdapter;
+import br.gov.serpro.quiz.model.Category;
+import br.gov.serpro.quiz.model.Game;
+import br.gov.serpro.quiz.model.Question;
+import br.gov.serpro.quiz.model.User;
+import br.gov.serpro.quiz.view.adapter.PropositionAdapter;
 import br.gov.serpro.quiz.view.util.FontUtil;
 import br.gov.serpro.quiz.view.util.Sound;
 
@@ -29,8 +29,8 @@ import br.gov.serpro.quiz.view.util.Sound;
  * @author Marlon Silva Carvalho
  * @since 1.0.0
  */
-@ContentView(R.layout.activity_jogo)
-public class JogoActivity extends RoboActivity {
+@ContentView(R.layout.activity_game)
+public class GameActivity extends RoboActivity {
 
 	private static String TAG = "quiz";
 
@@ -52,7 +52,7 @@ public class JogoActivity extends RoboActivity {
 	@InjectView(R.id.box_alerta)
 	private RelativeLayout boxAlerta;
 
-	private Jogo jogo = null;
+	private Game jogo = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class JogoActivity extends RoboActivity {
 
 		if (getIntent().getExtras() != null) {
 			final String categoria = getIntent().getExtras().getString("categoria");
-			jogo = new Jogo(new Categoria(categoria), Usuario.getUsuarioLogado());
+			jogo = new Game(new Category(categoria), User.getLoggedUser());
 
 			new AsyncTask<Void, Void, Void>() {
 
@@ -71,14 +71,14 @@ public class JogoActivity extends RoboActivity {
 
 				@Override
 				protected Void doInBackground(Void... params) {
-					jogo.iniciar();
+					jogo.initialize();
 					return null;
 				}
 
 				@Override
 				protected void onPostExecute(Void result) {
-					listViewProposicao.setAdapter(new ProposicaoAdapter(jogo.getQuestao().proposicoes));
-					textViewPergunta.setText(jogo.getQuestao().pergunta);
+					listViewProposicao.setAdapter(new PropositionAdapter(jogo.getQuestion().propositions));
+					textViewPergunta.setText(jogo.getQuestion().enunciation);
 					textViewCategoria.setText(categoria);
 					boxAlerta.setVisibility(View.GONE);
 				}
@@ -101,7 +101,7 @@ public class JogoActivity extends RoboActivity {
 			public void onItemClick(final AdapterView<?> adapterView, final View view, final int position, final long id) {
 
 				// Obter aqui a questão que está sendo respondida.
-				final Questao questao = jogo.getQuestao();
+				final Question questao = jogo.getQuestion();
 
 				new AsyncTask<Void, Void, Boolean>() {
 
@@ -109,18 +109,18 @@ public class JogoActivity extends RoboActivity {
 					protected Boolean doInBackground(Void... params) {
 
 						// Responde a pergunta e já passa para a próxima.
-						return jogo.responder(position);
+						return jogo.answer(position);
 					}
 
 					protected void onPostExecute(Boolean result) {
-						final ProposicaoAdapter adapter = (ProposicaoAdapter) listViewProposicao.getAdapter();
+						final PropositionAdapter adapter = (PropositionAdapter) listViewProposicao.getAdapter();
 
 						if (result) {
 							Sound.success();
-							adapter.atualizarProposicaoCertaErrada(questao.indiceProposicaoCerta, -1);
+							adapter.atualizarProposicaoCertaErrada(questao.indexCorrectProposition, -1);
 						} else {
 							Sound.fail();
-							adapter.atualizarProposicaoCertaErrada(questao.indiceProposicaoCerta, position);
+							adapter.atualizarProposicaoCertaErrada(questao.indexCorrectProposition, position);
 						}
 
 						listViewProposicao.setClickable(false);
@@ -131,8 +131,8 @@ public class JogoActivity extends RoboActivity {
 
 							@Override
 							public void run() {
-								if (jogo.isFinalizado()) {
-									final Intent intent = new Intent(JogoActivity.this, RankingActivity.class);
+								if (jogo.isFinished()) {
+									final Intent intent = new Intent(GameActivity.this, RankingActivity.class);
 									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 									startActivity(intent);
 								} else {
@@ -149,12 +149,12 @@ public class JogoActivity extends RoboActivity {
 	}
 
 	private void irProximaQuestao() {
-		listViewProposicao.setAdapter(new ProposicaoAdapter(jogo.getQuestao().proposicoes));
-		textViewPergunta.setText(jogo.getQuestao().pergunta);
+		listViewProposicao.setAdapter(new PropositionAdapter(jogo.getQuestion().propositions));
+		textViewPergunta.setText(jogo.getQuestion().enunciation);
 	}
 
 	private void atualizarDados() {
-		textViewPontuacao.setText(String.valueOf(jogo.getPontos()));
+		textViewPontuacao.setText(String.valueOf(jogo.getScore()));
 	}
 
 }

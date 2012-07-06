@@ -1,6 +1,6 @@
 package br.gov.serpro.quiz.exception;
 
-public class LoginInvalidoException extends RuntimeException {
+public class NetworkException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

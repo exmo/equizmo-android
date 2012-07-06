@@ -9,22 +9,22 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import br.gov.serpro.quiz.model.Categoria;
-import br.gov.serpro.quiz.model.Proposicao;
-import br.gov.serpro.quiz.model.Questao;
-import br.gov.serpro.quiz.service.JogoService;
+import br.gov.serpro.quiz.model.Category;
+import br.gov.serpro.quiz.model.Proposition;
+import br.gov.serpro.quiz.model.Question;
+import br.gov.serpro.quiz.service.GameService;
 
-public class JogoServiceImpl implements JogoService {
+public class GameServiceSoap implements GameService {
 
 	private static final String NAMESPACE = "http://webservice/";
 	private static final String METHOD_NAME = "giveMeAQuiz";
 
 	@Override
-	public List<Questao> obterQuestoes(final Categoria categoria) {
-		final List<Questao> result = new ArrayList<Questao>();
+	public List<Question> getQuestions(final Category category) {
+		final List<Question> result = new ArrayList<Question>();
 		final SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 		final SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		request.addProperty("category", categoria.nome);
+		request.addProperty("category", category.name);
 		envelope.setOutputSoapObject(request);
 
 		try {
@@ -36,15 +36,15 @@ public class JogoServiceImpl implements JogoService {
 				if (property instanceof SoapObject) {
 					SoapObject questaoSoap = (SoapObject) property;
 
-					final Questao questao = new Questao();
-					questao.pergunta = questaoSoap.getPropertyAsString("enunciation");
-					questao.indiceProposicaoCerta = Integer.valueOf(questaoSoap.getPropertyAsString("answer"));
+					final Question questao = new Question();
+					questao.enunciation = questaoSoap.getPropertyAsString("enunciation");
+					questao.indexCorrectProposition = Integer.valueOf(questaoSoap.getPropertyAsString("answer"));
 
 					for (int indice2 = 0; indice2 < questaoSoap.getPropertyCount(); indice2++) {
 						PropertyInfo pi = new PropertyInfo();
 						questaoSoap.getPropertyInfo(indice2, pi);
 						if ("propositions".equals(pi.getName())) {
-							questao.proposicoes.add(new Proposicao(pi.getValue().toString()));
+							questao.propositions.add(new Proposition(pi.getValue().toString()));
 						}
 					}
 
