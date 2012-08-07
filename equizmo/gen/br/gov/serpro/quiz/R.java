@@ -11,11 +11,11 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int color_listview_item_ranking_name=0x7f040004;
-        public static final int color_listview_item_ranking_order=0x7f040002;
-        public static final int color_listview_item_ranking_score=0x7f040003;
-        public static final int color_textview_label_score=0x7f040000;
-        public static final int color_textview_score=0x7f040001;
+        public static final int color_listview_item_ranking_name=0x7f050004;
+        public static final int color_listview_item_ranking_order=0x7f050002;
+        public static final int color_listview_item_ranking_score=0x7f050003;
+        public static final int color_textview_label_score=0x7f050000;
+        public static final int color_textview_score=0x7f050001;
     }
     public static final class drawable {
         public static final int background=0x7f020000;
@@ -31,61 +31,72 @@ public final class R {
         public static final int login_developed_by=0x7f02000a;
         public static final int login_inform=0x7f02000b;
         public static final int logo=0x7f02000c;
-        public static final int timer=0x7f02000d;
+        public static final int map=0x7f02000d;
+        public static final int penguim=0x7f02000e;
+        public static final int prefes=0x7f02000f;
+        public static final int snow=0x7f020010;
+        public static final int timer=0x7f020011;
     }
     public static final class id {
-        public static final int box_alerta=0x7f060012;
-        public static final int categorias_listview=0x7f060008;
-        public static final int categorias_textview_categoria=0x7f060007;
-        public static final int jogo_listview_proposicoes=0x7f060006;
-        public static final int jogo_textview_categoria=0x7f060004;
-        public static final int jogo_textview_label_pontuacao=0x7f060002;
-        public static final int jogo_textview_pergunta=0x7f060005;
-        public static final int jogo_textview_pontuacao=0x7f060003;
-        public static final int layout_box_pontuacao=0x7f060001;
-        public static final int layout_box_titulo_ranking=0x7f06000f;
-        public static final int listview_item_categoria_nome=0x7f060013;
-        public static final int listview_item_proposicao_nome=0x7f060015;
-        public static final int listview_item_proposicao_ordem=0x7f060014;
-        public static final int listview_item_ranking_colocacao=0x7f060016;
-        public static final int listview_item_ranking_nome=0x7f060017;
-        public static final int listview_item_ranking_pontuacao=0x7f060018;
-        public static final int login_button_entrar=0x7f06000b;
-        public static final int login_edittext_email=0x7f06000a;
-        public static final int login_edittext_nome=0x7f060009;
-        public static final int login_logo=0x7f060000;
-        public static final int ranking_button_jogar=0x7f06000c;
-        public static final int ranking_listview_jogos=0x7f060011;
-        public static final int ranking_textview_label_pontuacao=0x7f06000d;
-        public static final int ranking_textview_pontuacao=0x7f06000e;
-        public static final int ranking_textview_ranking_label=0x7f060010;
+        public static final int box_alerta=0x7f070015;
+        public static final int buttonPrefs=0x7f070011;
+        public static final int categorias_listview=0x7f070008;
+        public static final int categorias_textview_categoria=0x7f070007;
+        public static final int jogo_listview_proposicoes=0x7f070006;
+        public static final int jogo_textview_categoria=0x7f070004;
+        public static final int jogo_textview_label_pontuacao=0x7f070002;
+        public static final int jogo_textview_pergunta=0x7f070005;
+        public static final int jogo_textview_pontuacao=0x7f070003;
+        public static final int layout_box_pontuacao=0x7f070001;
+        public static final int layout_box_titulo_ranking=0x7f070010;
+        public static final int listview_item_categoria_nome=0x7f070016;
+        public static final int listview_item_proposicao_nome=0x7f070018;
+        public static final int listview_item_proposicao_ordem=0x7f070017;
+        public static final int listview_item_ranking_colocacao=0x7f070019;
+        public static final int listview_item_ranking_nome=0x7f07001a;
+        public static final int listview_item_ranking_pontuacao=0x7f07001b;
+        public static final int login_button_entrar=0x7f07000b;
+        public static final int login_edittext_email=0x7f07000a;
+        public static final int login_edittext_nome=0x7f070009;
+        public static final int login_logo=0x7f070000;
+        public static final int mapview=0x7f07000c;
+        public static final int ranking_button_jogar=0x7f07000d;
+        public static final int ranking_button_mapa=0x7f070014;
+        public static final int ranking_listview_jogos=0x7f070013;
+        public static final int ranking_textview_label_pontuacao=0x7f07000e;
+        public static final int ranking_textview_pontuacao=0x7f07000f;
+        public static final int ranking_textview_ranking_label=0x7f070012;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;
         public static final int activity_game_category=0x7f030001;
         public static final int activity_login=0x7f030002;
-        public static final int activity_ranking=0x7f030003;
-        public static final int include_alert=0x7f030004;
-        public static final int listview_item_category=0x7f030005;
-        public static final int listview_item_proposition=0x7f030006;
-        public static final int listview_item_ranking=0x7f030007;
+        public static final int activity_mapa=0x7f030003;
+        public static final int activity_ranking=0x7f030004;
+        public static final int include_alert=0x7f030005;
+        public static final int listview_item_category=0x7f030006;
+        public static final int listview_item_proposition=0x7f030007;
+        public static final int listview_item_ranking=0x7f030008;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int categoria_button_play_text=0x7f050007;
-        public static final int conn_servico_fail=0x7f05000a;
-        public static final int generic_message_title=0x7f050008;
-        public static final int generic_positive_button=0x7f050009;
-        public static final int login_button_enter_text=0x7f050005;
-        public static final int login_edittext_email_hint=0x7f050004;
-        public static final int login_edittext_name_hint=0x7f050002;
-        public static final int login_email_hint=0x7f05000f;
-        public static final int login_name_hint=0x7f05000e;
-        public static final int login_textview_email_text=0x7f050003;
-        public static final int login_textview_name_text=0x7f050001;
-        public static final int ranking_button_play_text=0x7f050006;
-        public static final int ranking_score=0x7f05000b;
-        public static final int ranking_updated=0x7f05000c;
-        public static final int select_category=0x7f05000d;
+        public static final int app_name=0x7f060000;
+        public static final int categoria_button_play_text=0x7f060007;
+        public static final int conn_servico_fail=0x7f06000a;
+        public static final int generic_message_title=0x7f060008;
+        public static final int generic_positive_button=0x7f060009;
+        public static final int login_button_enter_text=0x7f060005;
+        public static final int login_edittext_email_hint=0x7f060004;
+        public static final int login_edittext_name_hint=0x7f060002;
+        public static final int login_email_hint=0x7f06000f;
+        public static final int login_name_hint=0x7f06000e;
+        public static final int login_textview_email_text=0x7f060003;
+        public static final int login_textview_name_text=0x7f060001;
+        public static final int ranking_button_play_text=0x7f060006;
+        public static final int ranking_score=0x7f06000b;
+        public static final int ranking_updated=0x7f06000c;
+        public static final int select_category=0x7f06000d;
+    }
+    public static final class xml {
+        public static final int preferencias=0x7f040000;
     }
 }

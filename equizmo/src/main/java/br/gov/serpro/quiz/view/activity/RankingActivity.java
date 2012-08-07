@@ -6,6 +6,7 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,10 @@ import android.widget.TextView;
 import br.gov.serpro.quiz.R;
 import br.gov.serpro.quiz.model.User;
 import br.gov.serpro.quiz.view.adapter.RankingAdapter;
+import br.gov.serpro.quiz.view.util.Constants;
 import br.gov.serpro.quiz.view.util.FontUtil;
+
+import com.google.inject.Inject;
 
 /**
  * Activity da tela principal da aplicação.
@@ -29,6 +33,12 @@ import br.gov.serpro.quiz.view.util.FontUtil;
 public class RankingActivity extends RoboActivity {
 
 	private static String TAG = "quiz";
+
+	@InjectView(R.id.buttonPrefs)
+	private ImageButton buttonPrefs;
+
+	@InjectView(R.id.ranking_button_mapa)
+	private ImageButton buttonMapa;
 
 	@InjectView(R.id.ranking_listview_jogos)
 	private ListView listView;
@@ -45,22 +55,37 @@ public class RankingActivity extends RoboActivity {
 	@InjectView(R.id.ranking_textview_ranking_label)
 	private TextView textViewLabelRanking;
 
+	@Inject
+	private SharedPreferences sharedPreferences;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.i(TAG, "onCreate");
 		setListeners();
 		textViewPontuacao.setText(String.valueOf(User.getLoggedUser().score));
-		
+
 		FontUtil.setBauhaus(textViewLabelPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewPontuacao, getAssets());
 		FontUtil.setBauhaus(textViewLabelRanking, getAssets());
 
+		updateRanking();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		updateRanking();
+	}
+
+	private void updateRanking() {
 		new AsyncTask<Void, Void, List<User>>() {
 
 			@Override
 			protected List<User> doInBackground(Void... params) {
-				return User.getRanking();
+				final String quantity = sharedPreferences.getString(Constants.PREFS_QUANTITY_RANKING_KEY,
+						Constants.PREFS_QUANTITY_RANKING_DEFAULT);
+				return User.getRanking(Integer.valueOf(quantity));
 			}
 
 			@Override
@@ -69,7 +94,6 @@ public class RankingActivity extends RoboActivity {
 			}
 
 		}.execute();
-
 	}
 
 	private void setListeners() {
@@ -77,6 +101,26 @@ public class RankingActivity extends RoboActivity {
 
 			public void onClick(final View v) {
 				final Intent intent = new Intent(RankingActivity.this, GameCategoryActivity.class);
+				startActivity(intent);
+			}
+
+		});
+
+		buttonPrefs.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				final Intent intent = new Intent(RankingActivity.this, PreferenciasActivity.class);
+				startActivity(intent);
+			}
+
+		});
+
+		buttonMapa.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				final Intent intent = new Intent(RankingActivity.this, MapaActivity.class);
 				startActivity(intent);
 			}
 

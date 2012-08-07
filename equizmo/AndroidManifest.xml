@@ -16,6 +16,9 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+        
+        <uses-library android:name="com.google.android.maps"/>
+        
         <activity
             android:name=".view.activity.LoginActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
@@ -29,10 +32,10 @@
             android:name=".view.activity.RankingActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
         </activity>
-        <activity android:name=".view.activity.GameCategoryActivity" >
-        </activity>
-        <activity android:name=".view.activity.GameActivity" >
-        </activity>
+        <activity android:name=".view.activity.MapaActivity" />
+        <activity android:name=".view.activity.GameCategoryActivity" />
+        <activity android:name=".view.activity.GameActivity" />
+        <activity android:name=".view.activity.PreferenciasActivity" />
     </application>
 
 </manifest>

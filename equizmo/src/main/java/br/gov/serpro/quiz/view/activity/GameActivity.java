@@ -4,6 +4,7 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,8 @@ import br.gov.serpro.quiz.model.User;
 import br.gov.serpro.quiz.view.adapter.PropositionAdapter;
 import br.gov.serpro.quiz.view.util.FontUtil;
 import br.gov.serpro.quiz.view.util.Sound;
+
+import com.google.inject.Inject;
 
 /**
  * Activity responsável pela tela de desafio.
@@ -51,6 +54,9 @@ public class GameActivity extends RoboActivity {
 
 	@InjectView(R.id.box_alerta)
 	private RelativeLayout boxAlerta;
+
+	@Inject
+	private SharedPreferences sharedPreferences;
 
 	private Game jogo = null;
 

@@ -34,10 +34,14 @@ public class UserServiceRest implements UserService {
 	}
 
 	@Override
-	public List<User> getRanking() {
+	public List<User> getRanking(final int quantity) {
 		final List<User> result = new ArrayList<User>();
+		String json = HttpUtil.doGet("http://quiz-exmo.rhcloud.com/rest/user/ranking/");
 
-		final String json = HttpUtil.doGet("http://quiz-exmo.rhcloud.com/rest/user/ranking/5");
+		if (quantity <= 0) {
+			json = json + quantity;
+		}
+
 		try {
 			final JSONObject resultJsonObject = new JSONObject(json);
 			final JSONArray jsonArray = resultJsonObject.getJSONArray("users");
@@ -47,6 +51,8 @@ public class UserServiceRest implements UserService {
 				user.name = jsonObject.getString("name");
 				user.email = jsonObject.getString("email");
 				user.score = jsonObject.getInt("points");
+				user.latitude = jsonObject.getDouble("latitude");
+				user.longitude = jsonObject.getDouble("longitude");
 				result.add(user);
 			}
 		} catch (JSONException e) {

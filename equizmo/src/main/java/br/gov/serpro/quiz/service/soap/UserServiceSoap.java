@@ -78,12 +78,12 @@ public class UserServiceSoap implements UserService {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<User> getRanking() {
+	public List<User> getRanking(final int quantity) {
 		final List<User> result = new ArrayList<User>();
 		final SoapObject request = new SoapObject(NAMESPACE, RANKING_METHOD_NAME);
 		final SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
-		request.addProperty("offset", 5);
+		request.addProperty("offset", quantity);
 		envelope.setOutputSoapObject(request);
 
 		try {

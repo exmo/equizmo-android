@@ -15,6 +15,6 @@ public interface UserService {
 
 	Integer sendScore(String email, Integer score);
 	
-	List<User> getRanking();
+	List<User> getRanking(int quantity);
 	
 }

@@ -4,6 +4,11 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background" >
 
+    <br.gov.serpro.quiz.view.widget.SnowView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true" />
+
     <ImageView
         android:id="@+id/login_logo"
         android:layout_width="fill_parent"

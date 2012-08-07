@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/background" >
 
+    <br.gov.serpro.quiz.view.widget.SnowView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true" />
+
     <ImageView
         android:id="@+id/login_logo"
         android:layout_width="fill_parent"
@@ -55,12 +60,19 @@
 
     <LinearLayout
         android:id="@+id/layout_box_titulo_ranking"
-        android:layout_marginTop="10dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_box_pontuacao"
+        android:layout_marginTop="10dip"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/buttonPrefs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:src="@drawable/prefes" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -72,13 +84,11 @@
             android:id="@+id/ranking_textview_ranking_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="5dip"
             android:text="@string/ranking_updated"
-            android:textSize="20sp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -98,6 +108,15 @@
             android:divider="@null"
             android:dividerHeight="0dip" >
         </ListView>
+
+        <ImageButton
+            android:id="@+id/ranking_button_mapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@drawable/map" />
     </RelativeLayout>
 
     <ImageView

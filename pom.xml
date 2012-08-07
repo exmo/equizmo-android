@@ -16,11 +16,17 @@
 
 	<properties>
 		<platform.version>4.0.1.2</platform.version>
-		<android.sdk.path>/Users/marloncarvalho/Desenvolvimento/Android/android-sdk-macosx</android.sdk.path>
+		<android.sdk.path>/home/79325645572/Marlon/Desenvolvimento/Android/android-sdk</android.sdk.path>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.google.android.maps</groupId>
+				<artifactId>maps</artifactId>
+				<version>15_r2</version>
+				<scope>provided</scope>
+			</dependency>
 			<dependency>
 				<groupId>com.google.android</groupId>
 				<artifactId>android</artifactId>
@@ -33,7 +39,6 @@
 				<version>${platform.version}</version>
 				<scope>provided</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

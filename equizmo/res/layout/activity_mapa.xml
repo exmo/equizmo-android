@@ -29,23 +29,13 @@
         android:layout_marginTop="10dip"
         android:background="@drawable/box_ranking" >
 
-        <TextView
-            android:id="@+id/categorias_textview_categoria"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dip"
-            android:gravity="center_horizontal"
-            android:text="@string/select_category"
-            android:textColor="#FF9900"
-            android:textSize="20sp" />
-
-        <ListView
-            android:id="@+id/categorias_listview"
+        <com.google.android.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/categorias_textview_categoria"
-            android:divider="@null" />
+            android:apiKey="0-lwr1HxPM4c9Pr7oPk1qg6wRBc-qOx50BWmcqA"
+            android:clickable="true" />
     </RelativeLayout>
 
     <ImageView

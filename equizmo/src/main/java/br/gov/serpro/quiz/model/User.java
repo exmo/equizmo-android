@@ -86,8 +86,8 @@ public class User {
 		return User.loggedUser;
 	}
 
-	public static List<User> getRanking() {
-		return serviceRest.getRanking();
+	public static List<User> getRanking(final int quantity) {
+		return serviceRest.getRanking(quantity);
 	}
 
 }

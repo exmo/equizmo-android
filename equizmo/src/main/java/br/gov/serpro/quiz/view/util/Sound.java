@@ -3,6 +3,7 @@ package br.gov.serpro.quiz.view.util;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -20,6 +21,12 @@ final public class Sound {
 	}
 
 	public static void play(final String file) {
+		final boolean isPlaySound = Beans.getBean(SharedPreferences.class).getBoolean(Constants.PREFS_PLAY_SOUND_KEY,
+				true);
+		if (!isPlaySound) {
+			return;
+		}
+
 		final Context context = Beans.getBean(Context.class);
 		try {
 			AssetFileDescriptor afd = context.getAssets().openFd("mp3/" + file);
