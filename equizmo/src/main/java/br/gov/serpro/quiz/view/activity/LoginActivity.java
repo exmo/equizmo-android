@@ -52,7 +52,6 @@ public class LoginActivity extends RoboActivity {
 		super.onCreate(savedInstanceState);
 
 		if (User.loadLastUser()) {
-			System.out.println("MOTHER FUCKER!");
 			startRanking();
 		} else {
 			setListeners();
