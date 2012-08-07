@@ -36,11 +36,13 @@ public class UserServiceRest implements UserService {
 	@Override
 	public List<User> getRanking(final int quantity) {
 		final List<User> result = new ArrayList<User>();
-		String json = HttpUtil.doGet("http://quiz-exmo.rhcloud.com/rest/user/ranking/");
+		String url = "http://quiz-exmo.rhcloud.com/rest/user/ranking/";
 
-		if (quantity <= 0) {
-			json = json + quantity;
+		if (quantity > 0) {
+			url = url + quantity;
 		}
+
+		String json = HttpUtil.doGet(url);
 
 		try {
 			final JSONObject resultJsonObject = new JSONObject(json);

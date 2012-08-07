@@ -5,6 +5,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class LoginActivity extends RoboActivity {
 	@Inject
 	private LocationManager locationManager;
 
+	private LocationListener locationListener;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,52 +70,77 @@ public class LoginActivity extends RoboActivity {
 				buttonEnter.setClickable(false);
 				buttonEnter.setEnabled(false);
 
-				final Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
+				final Location lastLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 				final User user = new User();
 
 				user.name = editTextName.getText().toString();
 				user.email = editTextEmail.getText().toString();
 
-				if (location != null) {
-					user.longitude = location.getLongitude();
-					user.latitude = location.getLatitude();
+				if (lastLocation.getLatitude() == 0 && lastLocation.getLongitude() == 0) {
+
+					locationListener = new LocationListener() {
+
+						public void onLocationChanged(Location location) {
+							user.latitude = location.getLatitude();
+							user.longitude = location.getLongitude();
+							execute(user);
+							locationManager.removeUpdates(locationListener);
+						}
+
+						public void onStatusChanged(String provider, int status, Bundle extras) {
+						}
+
+						public void onProviderEnabled(String provider) {
+						}
+
+						public void onProviderDisabled(String provider) {
+						}
+
+					};
+					locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+					locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+				} else {
+					user.latitude = lastLocation.getLatitude();
+					user.longitude = lastLocation.getLongitude();
+					execute(user);
 				}
-
-				new AsyncTask<Void, Void, Boolean>() {
-
-					@Override
-					protected Boolean doInBackground(Void... params) {
-						boolean result = true;
-						try {
-							user.register();
-						} catch (final NetworkException e) {
-							result = false;
-						} catch (final RuntimeException e) {
-							result = false;
-						}
-						return result;
-					}
-
-					protected void onPostExecute(Boolean result) {
-						user.store();
-
-						buttonEnter.setClickable(true);
-						buttonEnter.setEnabled(true);
-						boxAlert.setVisibility(View.GONE);
-
-						if (!result) {
-							Message.error(R.string.conn_servico_fail, LoginActivity.this);
-						} else {
-							startRanking();
-						}
-					}
-
-				}.execute();
 
 			}
 
 		});
+	}
+
+	private void execute(final User user) {
+		new AsyncTask<Void, Void, Boolean>() {
+
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				boolean result = true;
+				try {
+					user.register();
+				} catch (final NetworkException e) {
+					result = false;
+				} catch (final RuntimeException e) {
+					result = false;
+				}
+				return result;
+			}
+
+			protected void onPostExecute(Boolean result) {
+				user.store();
+
+				buttonEnter.setClickable(true);
+				buttonEnter.setEnabled(true);
+				boxAlert.setVisibility(View.GONE);
+
+				if (!result) {
+					Message.error(R.string.conn_servico_fail, LoginActivity.this);
+				} else {
+					startRanking();
+				}
+			}
+
+		}.execute();
 	}
 
 	private void startRanking() {
