@@ -37,11 +37,22 @@
         android:layout_marginTop="10dip"
         android:background="@drawable/box_pontuacao" >
 
+        <ImageButton
+            android:id="@+id/ranking_button_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/logout" />
+
         <TextView
             android:id="@+id/ranking_textview_label_pontuacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/ranking_button_logout"
             android:text="@string/ranking_score"
             android:textColor="@color/color_textview_label_score"
             android:textSize="19sp" />
@@ -68,6 +79,7 @@
         android:orientation="horizontal" >
 
         <ImageButton
+            android:background="@null"
             android:id="@+id/buttonPrefs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,15 +120,6 @@
             android:divider="@null"
             android:dividerHeight="0dip" >
         </ListView>
-
-        <ImageButton
-            android:id="@+id/ranking_button_mapa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="@null"
-            android:src="@drawable/map" />
     </RelativeLayout>
 
     <ImageView
@@ -125,5 +128,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:src="@drawable/image_face_left" />
+
+    <ImageButton
+        android:id="@+id/ranking_button_mapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:src="@drawable/map" />
 
 </RelativeLayout>

@@ -78,6 +78,16 @@ public class User {
 		editor.commit();
 	}
 
+	public static void removeLoggedUser() {
+		final Context context = Beans.getBean(Context.class);
+		final SharedPreferences prefs = context.getSharedPreferences("QuizPreferences", 0);
+		final Editor editor = prefs.edit();
+
+		editor.putString("name", null);
+		editor.putString("email", null);
+		editor.commit();
+	}
+
 	public static void setLoggedUser(final User loggedUser) {
 		User.loggedUser = loggedUser;
 	}

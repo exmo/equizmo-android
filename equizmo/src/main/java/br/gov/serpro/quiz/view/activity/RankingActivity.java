@@ -34,6 +34,9 @@ public class RankingActivity extends RoboActivity {
 
 	private static String TAG = "quiz";
 
+	@InjectView(R.id.ranking_button_logout)
+	private ImageButton buttonLogout;
+
 	@InjectView(R.id.buttonPrefs)
 	private ImageButton buttonPrefs;
 
@@ -121,6 +124,18 @@ public class RankingActivity extends RoboActivity {
 			@Override
 			public void onClick(View v) {
 				final Intent intent = new Intent(RankingActivity.this, MapaActivity.class);
+				startActivity(intent);
+			}
+
+		});
+		
+		buttonLogout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				User.removeLoggedUser();
+				final Intent intent = new Intent(RankingActivity.this, LoginActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
 
