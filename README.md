@@ -17,5 +17,4 @@ conosco!
 ![Login](http://exmo.github.com/images/android/login_screen.png)
 ![Ranking](http://exmo.github.com/images/android/ranking_screen.png)
 ![Questions](http://exmo.github.com/images/android/quiz_screen.png)
-![Score](http://exmo.github.com/images/android/map_screen.png)
 
