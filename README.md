@@ -4,7 +4,7 @@ eQuizmo para Android
 O eQuizmo é um simples jogo opensource em formato de Quiz. O participante deve responder a perguntas para somar pontos 
 e ficar bem no ranking geral!
 
-Este projeto temo como objetivo exemplificar a implementação de um projeto Android com as seguintes funcionalidades:
+Este projeto tem como objetivo exemplificar a implementação de um projeto Android com as seguintes funcionalidades:
 geolocalização, soap, rest, internacionalização, formatações, organização de código, preferências e muitas outras características
 do ambiente Android.
 
