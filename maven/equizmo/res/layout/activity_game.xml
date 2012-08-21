@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <br.gov.serpro.quiz.view.widget.SnowView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dip"
+        android:src="@drawable/logo" />
+
+    <include layout="@layout/include_alert" />
+
+    <RelativeLayout
+        android:id="@+id/layout_box_pontuacao"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/box_pontuacao" >
+
+        <TextView
+            android:id="@+id/jogo_textview_label_pontuacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/ranking_score"
+            android:textColor="@color/color_textview_label_score"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/jogo_textview_pontuacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:text="0.0"
+            android:textColor="@color/color_textview_score"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/jogo_textview_categoria"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_box_pontuacao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dip"
+        android:gravity="center_horizontal"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:text="Categoria"
+        android:textColor="#FF9900"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jogo_textview_categoria"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/box_ranking" >
+
+        <TextView
+            android:id="@+id/jogo_textview_pergunta"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dip"
+            android:gravity="center_horizontal"
+            android:textColor="#FF9900"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/jogo_listview_proposicoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jogo_textview_pergunta"
+            android:layout_marginTop="20dip"
+            android:divider="@null" >
+        </ListView>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/image_face_left" />
+
+</RelativeLayout>
