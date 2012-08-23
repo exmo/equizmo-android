@@ -21,27 +21,29 @@ public class SnowView extends SurfaceView implements SurfaceHolder.Callback {
 	private final List<Snow> snows = new ArrayList<Snow>();
 	private int height;
 	private Bitmap back;
-	
+
 	public SnowView(final Context context, AttributeSet attrs) {
 		super(context, attrs);
 		holder = getHolder();
 		holder.addCallback(this);
-		this.back  = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+		this.back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
 		holder.setFormat(PixelFormat.TRANSPARENT);
 	}
 
 	@Override
 	protected void onDraw(final Canvas canvas) {
-		canvas.drawBitmap(back, 0, 0, null);
-		for (int i = 0; i < snows.size(); i++) {
-			final Snow snow = snows.get(i);
-			final Bitmap bitmap = snow.getGraphic();
-			final Coordinates coords = snow.getCoordinates();
-			canvas.drawBitmap(bitmap, coords.getX(), coords.getY() - snow.getSpeed(), null);
-			coords.setY(coords.getY() + 1);
+		if (canvas != null) {
+			canvas.drawBitmap(back, 0, 0, null);
+			for (int i = 0; i < snows.size(); i++) {
+				final Snow snow = snows.get(i);
+				final Bitmap bitmap = snow.getGraphic();
+				final Coordinates coords = snow.getCoordinates();
+				canvas.drawBitmap(bitmap, coords.getX(), coords.getY() - snow.getSpeed(), null);
+				coords.setY(coords.getY() + 1);
 
-			if ((coords.getY() - snow.getSpeed()) > this.height) {
-				coords.setY(0);
+				if ((coords.getY() - snow.getSpeed()) > this.height) {
+					coords.setY(0);
+				}
 			}
 		}
 	}
