@@ -75,7 +75,7 @@ public class LoginActivity extends RoboActivity {
 				user.name = editTextName.getText().toString();
 				user.email = editTextEmail.getText().toString();
 
-				if (lastLocation.getLatitude() == 0 && lastLocation.getLongitude() == 0) {
+				if (lastLocation == null || (lastLocation.getLatitude() == 0 && lastLocation.getLongitude() == 0)) {
 
 					locationListener = new LocationListener() {
 

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background" >
+    android:layout_height="match_parent" >
 
     <br.gov.serpro.quiz.view.widget.SnowView
         android:layout_width="fill_parent"
@@ -79,11 +78,11 @@
         android:orientation="horizontal" >
 
         <ImageButton
-            android:background="@null"
             android:id="@+id/buttonPrefs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dip"
+            android:background="@null"
             android:src="@drawable/prefes" />
 
         <ImageView

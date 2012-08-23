@@ -21,11 +21,23 @@ public class LoginTestCase extends ActivityInstrumentationTestCase2<LoginActivit
 	}
 
 	@MediumTest
-	public void testLogin() throws Exception {
-		getActivity();
-//		name = (EditText) getActivity().findViewById(R.id.login_edittext_nome);
-//		email = (EditText) getActivity().findViewById(R.id.login_edittext_email);
-//		buttonLogin = (ImageButton) getActivity().findViewById(R.id.login_button_entrar);
+	public void testLogin() throws Throwable {
+		
+		name = (EditText) getActivity().findViewById(br.gov.serpro.quiz.R.id.login_edittext_nome);
+		email = (EditText) getActivity().findViewById(br.gov.serpro.quiz.R.id.login_edittext_email);
+		buttonLogin = (ImageButton) getActivity().findViewById(br.gov.serpro.quiz.R.id.login_button_entrar);
+		
+		runTestOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				name.setText("m");
+				email.setText("m");
+				buttonLogin.performClick();
+			}
+			
+		});
+
 		
 	}
 

@@ -5,65 +5,80 @@ import java.util.List;
 import java.util.Random;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
+import android.graphics.PixelFormat;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import br.gov.serpro.quiz.R;
+import br.gov.serpro.quiz.view.widget.Snow.Coordinates;
 
-public class SnowView extends View {
-	private int snow_flake_count = 10;
-	private final List<Drawable> drawables = new ArrayList<Drawable>();
-	private int[][] coords;
-	private final Drawable snow_flake;
-
+public class SnowView extends SurfaceView implements SurfaceHolder.Callback {
+	private SurfaceHolder holder;
+	private AnimThread animThread;
+	private final List<Snow> snows = new ArrayList<Snow>();
+	private int height;
+	private Bitmap back;
+	
 	public SnowView(final Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setFocusable(true);
-		setFocusableInTouchMode(true);
-
-		snow_flake = context.getResources().getDrawable(R.drawable.snow);
-		snow_flake.setBounds(0, 0, snow_flake.getIntrinsicWidth(), snow_flake.getIntrinsicHeight());
+		holder = getHolder();
+		holder.addCallback(this);
+		this.back  = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+		holder.setFormat(PixelFormat.TRANSPARENT);
 	}
 
 	@Override
-	protected void onSizeChanged(int width, int height, int oldw, int oldh) {
-		super.onSizeChanged(width, height, oldw, oldh);
-		Random random = new Random();
-		Interpolator interpolator = new LinearInterpolator();
+	protected void onDraw(final Canvas canvas) {
+		canvas.drawBitmap(back, 0, 0, null);
+		for (int i = 0; i < snows.size(); i++) {
+			final Snow snow = snows.get(i);
+			final Bitmap bitmap = snow.getGraphic();
+			final Coordinates coords = snow.getCoordinates();
+			canvas.drawBitmap(bitmap, coords.getX(), coords.getY() - snow.getSpeed(), null);
+			coords.setY(coords.getY() + 1);
 
-		snow_flake_count = Math.max(width, height) / 20;
-		coords = new int[snow_flake_count][];
-		drawables.clear();
-		for (int i = 0; i < snow_flake_count; i++) {
-			Animation animation = new TranslateAnimation(0, height / 10 - random.nextInt(height / 5), 0, height + 30);
-			animation.setDuration(10 * height + random.nextInt(5 * height));
-			animation.setRepeatCount(-1);
-			animation.initialize(10, 10, 10, 10);
-			animation.setInterpolator(interpolator);
-
-			coords[i] = new int[] { random.nextInt(width - 30), -30 };
-
-			drawables.add(new AnimateDrawable(snow_flake, animation));
-			animation.setStartOffset(random.nextInt(20 * height));
-			animation.startNow();
+			if ((coords.getY() - snow.getSpeed()) > this.height) {
+				coords.setY(0);
+			}
 		}
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {
-		for (int i = 0; i < snow_flake_count; i++) {
-			Drawable drawable = drawables.get(i);
-			canvas.save();
-			canvas.translate(coords[i][0], coords[i][1]);
-			drawable.draw(canvas);
-			canvas.restore();
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		this.height = height;
+		final int snowFlakeCount = Math.max(width, height) / 20;
+		final Random random = new Random();
+		snows.clear();
+		for (int quantity = 0; quantity < snowFlakeCount; quantity++) {
+			final Snow snow = new Snow((BitmapFactory.decodeResource(getResources(), R.drawable.snow)));
+			snow.getCoordinates().setX(random.nextInt(width - 30));
+			snow.getCoordinates().setY(0);
+			snow.setSpeed(random.nextInt(2500));
+			snows.add(snow);
 		}
-		invalidate();
+	}
+
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		animThread = new AnimThread(holder, this);
+		animThread.setRunning(true);
+		animThread.start();
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		boolean retry = true;
+		animThread.setRunning(false);
+		while (retry) {
+			try {
+				animThread.join();
+				retry = false;
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 
 }
